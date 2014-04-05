@@ -14,10 +14,11 @@
   <script src="chui/chui-3.5.3.js"></script>
 
   <!-- Google Maps Begin -->
-  <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <script src="js/Maps.js"></script>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=API_KEY&sensor=SET_TO_TRUE_OR_FALSE">
-    </script>-->
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOFdrYctTCbl2op0ZTzCm-UyKrXhB2XPM&sensor=false">
+    </script>
   <!-- Google Maps End -->
   <style>
     .icon {
@@ -148,6 +149,10 @@
     }
   </style>
   <script type="text/javascript">
+    $( document ).ready(function() {
+      console.log( "ready!" );
+      google.maps.event.addDomListener(window, 'load', initialize);
+    });
     $(function() {
       
       ////////////////////
@@ -399,13 +404,14 @@
   <nav>
     <h1>Demo</h1>
   </nav>
-  <!-- MAIN MAP -->
-<!--   <div id="main_map"></div>
- -->  <article id="main" class="current">
+  <article id="main" class="current">
     <section>
       <ul class='list'>
         <li data-goto="segmented-article" class='nav'>
           <h3>Segmented Control</h3>
+        </li>
+        <li data-goto="googmapsTesting" class='nav'>
+          <h3>googmapsTesting</h3>
         </li>
         <li data-goto="select-article" class='nav'>
           <h3>Select List</h3>
@@ -510,7 +516,16 @@
   </article>
   <nav>
     <a class='button back'>Demo</a>
-    <h1>Select List</h1>
+    <h1>Google Maps</h1>
+  </nav>
+  <article id='googmapsTesting' class='next'>
+    <section>
+      <div id="map-canvas">Hello</div>
+    </section>
+  </article>
+  <nav>
+    <a class='button back'>Demo</a>
+    <h1>Deletable List</h1>
   </nav>
   <article id='select-article' class='next'>
     <section>
