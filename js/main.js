@@ -94,6 +94,8 @@ var app = {
 			app.everything = snap.val();
 			app.posts = app.everything.posts;
 			app.friends = app.everything.friends;
+			displayPostsOnMap();
+			displayEventsOnMap();
 		});
 		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
@@ -166,43 +168,6 @@ var app = {
 			}
 		}
 		appendEventsList();
-
-		function displayPostsOnMap(){
-			// references the list of posts individual to the user in the format of the
-			//  /posts/pushId object
-			for (var prop in app.posts) {
-				if (app.posts.hasOwnProperty(prop)) {
-					var post = app.posts.prop;
-					var creatorName;
-					console.log('display posts on map');
-					app.ref.child('users').child(post.creator).child('name').once( 'value', function(snap) {
-						console.log('displayPostsOnMap()');
-						creatorName = snap.val();
-					});
-					// post.caption;
-					// post.creator;
-					// post.lat;
-					// post.lng;
-					// post.picUrl;
-					addSoloMarker(new google.maps.LatLng(post.lat, post.lng), creatorName);
-				}
-			}
-		}
-		displayPostsOnMap();
-
-		function displayEventsOnMap(){
-			for (var prop in app.events) {
-				if (app.events.hasOwnProperty(prop)) {
-					var _event = app.events.prop;
-					var creatorName;
-					app.ref.child('users').child(_event.creator).child('name').once( 'value', function(snap) {
-						creatorName = snap.val();
-					});
-					addEventMarker(new google.maps.LatLng(_event.lat, _event.lng), creatorName);
-				}
-			}
-		}
-		displayEventsOnMap();
 	},
 
 	makeEvent: function(e){
@@ -383,3 +348,40 @@ function stuff(){
 	}
 }
 $(document).ready( stuff );
+
+
+		function displayPostsOnMap(){
+			// references the list of posts individual to the user in the format of the
+			//  /posts/pushId object
+			for (var prop in app.posts) {
+				if (app.posts.hasOwnProperty(prop)) {
+					var post = app.posts.prop;
+					var creatorName;
+					console.log('display posts on map');
+					app.ref.child('users').child(post.creator).child('name').once( 'value', function(snap) {
+						console.log('displayPostsOnMap()');
+						creatorName = snap.val();
+					});
+					// post.caption;
+					// post.creator;
+					// post.lat;
+					// post.lng;
+					// post.picUrl;
+					addSoloMarker(new google.maps.LatLng(post.lat, post.lng), creatorName);
+				}
+			}
+		}
+		// displayPostsOnMap();
+
+		function displayEventsOnMap(){
+			for (var prop in app.events) {
+				if (app.events.hasOwnProperty(prop)) {
+					var _event = app.events.prop;
+					var creatorName;
+					app.ref.child('users').child(_event.creator).child('name').once( 'value', function(snap) {
+						creatorName = snap.val();
+					});
+					addEventMarker(new google.maps.LatLng(_event.lat, _event.lng), creatorName);
+				}
+			}
+		}
