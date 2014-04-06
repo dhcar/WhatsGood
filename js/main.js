@@ -211,7 +211,7 @@ var app = {
 		// make event
 	},
 
-	searchFriends: function(){
+	searchFriend: function(){
 		/* Act on the event */
 		var input       = document.getElementById('searchFriends');
 		var search_term = input.value.toLowerCase();
