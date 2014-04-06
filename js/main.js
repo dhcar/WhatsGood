@@ -129,6 +129,7 @@ var app = {
 		});
 		document.getElementById('submitNewEvent').addEventListener('click', this.makeEvent);
 		document.getElementById('searchFriends').addEventListener('keypress', this.searchFriends);
+		
 	},
 
 	makeEvent: function(e){
@@ -144,7 +145,6 @@ var app = {
 		var newRef = this.ref.child('events').push(event);
 		var pushId = newRef.name();
 		// make event
-		
 	},
 
 	searchFriends: function(){
@@ -168,7 +168,6 @@ var app = {
 		// 
 		// scan array for an indexOf > -1 for the search_term
 		// 
-		//for (var i = 0; i < search_res.length; i++) {
 		for(var i=0; i < friendRay.length; i++){
 			var k     = i;
 			var userId  = friendRay[k][0];

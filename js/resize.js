@@ -50,13 +50,13 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
     document.getElementById('filesToUpload').onchange = function(){
         var files = document.getElementById('filesToUpload').files;
         for(var i = 0; i < files.length; i++) {
-            resizeAndUpload(files[i], 'newPick');
+            resizeAndUpload(files[i], 'newPic');
         }
     };
     document.getElementById('filesToUpload2').onchange = function(){
         var files = document.getElementById('filesToUpload2').files;
         for(var i = 0; i < files.length; i++) {
-            resizeAndUpload(files[i], 'newPick2');
+            resizeAndUpload(files[i], 'eventImage');
         }
     };
 } else {
@@ -111,12 +111,12 @@ var reader = new FileReader();
   //      xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   //      var data = 'image=' + dataURL;
   //      xhr.send(data);
-      }
+      };
  
 
 
 
-   }
+   };
    reader.readAsDataURL(file);
 }
 
