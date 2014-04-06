@@ -159,11 +159,6 @@
   <script type="text/javascript">
     $( document ).ready(function() {
       google.maps.event.addDomListener(window, 'load', initializeMap);
-      $('body').keypress(function (e) {
-        if (e.keyCode == 'c'.charCodeAt(0)) {
-          clearMarkers();
-        }
-      });
       // makeInvite();
       // $('.right-off-canvas-toggle').on('click', makeInvite);
     });
@@ -530,11 +525,19 @@
   </article>
   <nav>
     <a class='button back'>Demo</a>
-    <h1>Google Maps</h1>
+    <h1>Map</h1>
+    <a class='button align-flush'>Place Holder</a>
   </nav>
   <article id='googmapsTesting' class='next'>
     <div id="map-canvas"></div>
   </article>
+  <div class='toolbar next horizontal centered'>
+      <a class='button' onclick="mapCurrent()"><img src="images/Location.png"></a>
+      <a class='button' onclick=""><img src="images/List.png"></a>
+      <a class='button' onclick=""><img src="images/Camera.png"></a>
+      <a class='button' onclick="toggleMarkers(false)"><img src="images/Group.png"></a>
+      <a class='button' onclick="toggleMarkers(true)"><img src="images/People.png"></a>
+  </div>
   <nav>
     <a class='button back'>Demo</a>
     <h1>Deletable List</h1>

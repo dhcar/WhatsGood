@@ -1,10 +1,13 @@
 var Map = {
 	map : null,
 	center : null,
-	currentPos : null,
 	MY_MAPTYPE_ID : 'custom_style',
 	geocoder : null,
-	markers : []
+	currMarker : null,
+	soloToggle : true,
+	soloMarkers : [],
+	eventToggle : true,
+	eventMarkers : []
 }
 
 function initializeMap() {
@@ -24,7 +27,8 @@ function initializeMap() {
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, Map.MY_MAPTYPE_ID]
     },
-    mapTypeId: Map.MY_MAPTYPE_ID
+    mapTypeId: Map.MY_MAPTYPE_ID,
+    disableDoubleClickZoom : true
   };
 
   Map.map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -44,8 +48,8 @@ function initializeMap() {
   	Map.center = Map.map.getCenter();
   });
 
-  google.maps.event.addListener(Map.map, 'click', function(event) {
-    addMarker(event.latLng);
+  google.maps.event.addListener(Map.map, 'dblclick', function(event) {
+    addEventMarker(event.latLng);
   });
 
   $(window).resize(function(){
@@ -56,10 +60,10 @@ function initializeMap() {
 function mapCurrent() {
 	if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      Map.currentPos = Map.center = new google.maps.LatLng(position.coords.latitude,
+      Map.center = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
-      addMarker(Map.center, 'Current Location');
+      addPersonalMarker(Map.center, 'Current Location');
 
       Map.map.setCenter(Map.center);
     }, function() {
@@ -71,21 +75,73 @@ function mapCurrent() {
   }
 }
 
-function addMarker(location, title) {
-	var image = title ? {
-		url: 'images/music/kiss.jpg',
+function addEventMarker(location, title) {
+	var image = {
+		url: 'images/Group.png',
 		// This marker is 20 pixels wide by 32 pixels tall.
 		scaledSize: new google.maps.Size(20, 20),
 		// The origin for this image is 0,0.
 		origin: new google.maps.Point(0,0)
-	} : null;
+	};
 	var marker = new google.maps.Marker({
 	  position: location,
 	  map: Map.map,
-	  title: title || "Click",
-	  icon: image || null
+	  title: title,
+	  icon: image
 	});
-	Map.markers.push(marker);
+	Map.eventMarkers.push(marker);
+}
+
+function addSoloMarker(location, title) {
+	var image = {
+		url: 'images/People.png',
+		// This marker is 20 pixels wide by 32 pixels tall.
+		scaledSize: new google.maps.Size(20, 20),
+		// The origin for this image is 0,0.
+		origin: new google.maps.Point(0,0)
+	};
+	var marker = new google.maps.Marker({
+	  position: location,
+	  map: Map.map,
+	  title: title,
+	  icon: image
+	});
+	Map.soloMarkers.push(marker);
+}
+
+function toggleMarkers(isSolo){
+	if (isSolo){
+		if (Map.soloToggle){
+			hideMarkers(true);
+		} else {
+			showMarkers(true);
+		}
+		Map.soloToggle = !Map.soloToggle;
+	} else {
+		if (Map.eventToggle){
+			hideMarkers(false);
+		} else {
+			showMarkers(false);
+		}
+		Map.eventToggle = !Map.eventToggle;
+	}
+}
+
+function addPersonalMarker(location, title) {
+	var image = {
+		url: 'images/Location.png',
+		// This marker is 20 pixels wide by 32 pixels tall.
+		scaledSize: new google.maps.Size(20, 20),
+		// The origin for this image is 0,0.
+		origin: new google.maps.Point(0,0)
+	};
+	if(Map.currMarker) Map.currMarker.setMap(null);
+	Map.currMarker = new google.maps.Marker({
+	  position: location,
+	  map: Map.map,
+	  title: title,
+	  icon: image
+	});
 }
 
 function addAddressMarker(address) {
@@ -98,24 +154,40 @@ function addAddressMarker(address) {
   });
 }
 
-function pinMarkers(map){
-	for(var i = 0; i < Map.markers.length; ++i){
-		Map.markers[i].setMap(map);
+function pinSoloMarkers(map){
+	for(var i = 0; i < Map.soloMarkers.length; ++i){
+		Map.soloMarkers[i].setMap(map);
 	}
 }
 
-function hideMarkers(){
-	pinMarkers(null);
+function pinEventMarkers(map){
+	for(var i = 0; i < Map.eventMarkers.length; ++i){
+		Map.eventMarkers[i].setMap(map);
+	}
 }
 
-function showMarkers(){
-	pinMarkers(null);
+function showMarkers(isSolo){
+	if(isSolo)
+		pinSoloMarkers(Map.map);
+	else
+		pinEventMarkers(Map.map);
 }
 
-function clearMarkers(){
-	hideMarkers();
-	Map.markers = [];
-	mapCurrent();
+function hideMarkers(isSolo){
+	if(isSolo)
+		pinSoloMarkers(null);
+	else
+		pinEventMarkers(null);
+}
+
+function clearMarkers(isSolo){
+	if(isSolo){
+		hideMarkers(true);
+		Map.soloMarkers = [];
+		mapCurrent();
+	}else{
+
+	}
 }
 
 function handleNoGeolocation(errorFlag) {
