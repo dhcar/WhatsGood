@@ -222,7 +222,12 @@
     <a class='button align-flush' onclick="hackUINavigation('#add-friend')">Add Friend</a>
   </nav>
   <article  id="main" class="current">
-    <div id="map-canvas"></div>
+    <div id='mapStuff'>
+      <div id="directions-panel">
+        <a class='button' onclick="$('#directions-panel').hide();">Hide</a>
+      </div>
+      <div id="map-canvas"></div>
+    </div>
   </article>
   <div class='toolbar current horizontal centered'>
     <a class='button' onclick="mapCurrent()"><img src="images/Location.png"></a>

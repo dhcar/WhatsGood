@@ -40,6 +40,7 @@ function initializeMap() {
       mapOptions);
 
   Map.directionsDisplay.setMap(Map.map);
+  Map.directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
   var styledMapOptions = {
     name: 'Main Style'
@@ -64,10 +65,10 @@ function initializeMap() {
   	Map.map.setCenter(Map.center);
   });
 
-  var el = document.getElementById("makeEventBack");
-  el.addEventListener("touchend", function() {
-  	removeLastMarker(false);
-  }, false);
+  // var el = document.getElementById("makeEventBack");
+  // el.addEventListener("touchend", function() {
+  // 	removeLastMarker(false);
+  // }, false);
 }
 
 function mapCurrent() {
@@ -238,6 +239,7 @@ function calcRoute(){
       travelMode: google.maps.TravelMode.DRIVING
   };
   Map.directionsService.route(request, function(response, status){
+  	$('#directions-panel').show();
     if (status == google.maps.DirectionsStatus.OK) {
       Map.directionsDisplay.setDirections(response);
     } else {
