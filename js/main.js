@@ -286,9 +286,7 @@ var app = {
 
 	setUserInfo: function(snap){
 		console.log(snap.val());
-		if(!app.user){
-			app.user = snap.val();
-		}
+		app.user = snap.val();
 	},
 
 	combEvents: function(snap){
@@ -321,15 +319,15 @@ var app = {
     	});
     	app.auth = auth;
     },
-		// app.auth = new FirebaseSimpleLogin(app.ref, function(error, user){
-		// 	if (error) {
-		// 		console.log(error);
-		// 	} else if (!error) {
-		// 		console.log(user);
-		// 		app.user = user;
-		// 		console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-		// 	}
-		// });
+	// app.auth = new FirebaseSimpleLogin(app.ref, function(error, user){
+	// 	if (error) {
+	// 		console.log(error);
+	// 	} else if (!error) {
+	// 		console.log(user);
+	// 		app.user = user;
+	// 		console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+	// 	}
+	// });
 
 	getPosts: function(snap){
 		console.log('get posts');
