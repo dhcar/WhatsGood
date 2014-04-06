@@ -73,19 +73,19 @@ var app = {
 
 	self: this,
 
-	auth: {},
+	// auth: {},
 
 	ref: new Firebase('https://whatsgood.firebaseio.com/'),
 
-	user: {},
+	// user: {},
 
-	posts: {},
+	// posts: {},
 
-	events: {},
+	// events: {},
 
-	friends: {},
+	// friends: {},
 
-	invites: {},
+	// invites: {},
 
 	init: function(){
 		// read
