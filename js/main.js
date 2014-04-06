@@ -266,16 +266,27 @@ var app = {
 	},
 
 	setAuth: function(){
-		app.auth = new FirebaseSimpleLogin(app.ref, function(error, user){
-			if (error) {
-				console.log(error);
-			} else if (!error) {
-				console.log(user);
-				app.user = user;
-				console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-			}
-		});
-	},
+		var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+    	    if (error) {
+    	        console.log('doLogin');
+    	        console.log(error);
+    	    } else if (!error) {
+    	        console.log("user.id: " + user.id);
+    	        if (user.id) {
+    	            app.user = user;
+    	        }
+    	    }
+    	});
+    },
+		// app.auth = new FirebaseSimpleLogin(app.ref, function(error, user){
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else if (!error) {
+		// 		console.log(user);
+		// 		app.user = user;
+		// 		console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+		// 	}
+		// });
 
 	getPosts: function(snap){
 		var postId = snap.val;
