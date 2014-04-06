@@ -68,7 +68,6 @@ function elt(tag, content, attrs) {
 // private
 // invites
 // users
-$(document).ready(app.setAuth);
 
 var app = {
 
@@ -192,7 +191,7 @@ var app = {
 				}
 			}
 		}
-
+		displayEventsOnMap();
 	},
 
 	makeEvent: function(e){
@@ -289,5 +288,6 @@ var app = {
 			self.posts[postId] = snap2.val();
 		});
 	},
-
 };
+
+$(document).ready(app.setAuth);
