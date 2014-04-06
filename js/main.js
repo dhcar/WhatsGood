@@ -90,10 +90,10 @@ var app = {
 	init: function(){
 		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
-		this.ref.child(this.user.id).child('recentPosts').on('child_added', this.getPosts);
-		this.ref.child('private').child(this.user.id).child('friends').on('child_added', this.makeFriends);
-		this.ref.child('private').child(this.user.id).child('events').on('child_added', this.combEvents);
-		this.ref.child('invites').child(this.user.id).on('child_added', this.makeInvites);
+		this.ref.child(this.user.id).child('recentPosts').on('value', this.getPosts);
+		this.ref.child('private').child(this.user.id).child('friends').on('value', this.makeFriends);
+		this.ref.child('private').child(this.user.id).child('events').on('value', this.combEvents);
+		this.ref.child('invites').child(this.user.id).on('value', this.makeInvites);
 		// 
 		// firebase events
 		// 
