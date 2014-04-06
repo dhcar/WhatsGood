@@ -13,11 +13,20 @@ function initializeMap() {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Location found using HTML5.'
-      });
+      var image = {
+	    url: 'images/music/kiss.jpg',
+	    // This marker is 20 pixels wide by 32 pixels tall.
+	    scaledSize: new google.maps.Size(20, 20),
+	    // The origin for this image is 0,0.
+	    origin: new google.maps.Point(0,0)
+	  };
+
+      var marker = new google.maps.Marker({
+	      position: pos,
+	      map: map,
+	      title: 'Current Location',
+	      icon: image
+	  });
 
       map.setCenter(pos);
     }, function() {
@@ -38,7 +47,7 @@ function handleNoGeolocation(errorFlag) {
 
   var options = {
     map: map,
-    position: new google.maps.LatLng(60, 105),
+    position: new google.maps.LatLng(36.977598,-122.030495),
     content: content
   };
 
