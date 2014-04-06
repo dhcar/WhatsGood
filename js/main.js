@@ -95,7 +95,57 @@ var app = {
 		self.ref.child('private').child(user.id).child('friends').on('child_added', this.makeFriends);
 		self.ref.child('private').child(user.id).child('events').on('child_added', this.combEvents);
 		self.ref.child('invites').child(user.id).on('child_added', this.makeInvites);
+		// 
+		// firebase events
+		// 
+		var newPicSubmit = document.getElementById('newPicSubmit');
+		newPicSubmit.addEventListener('click', function(e){
+			var blob = this.src;
+			var type = this.getAttribute('data-pic-type');
+			var postObj = {
+				caption: caption || '',
+				picUrl: blob,
+				lat: Map.currMarker.getPosition().lat(),
+				lng: Map.currMarker.getPosition().lng(),
+				creator: userId,
+				timestamp: Firebase.ServerValue.TIMESTAMP
+			};
+			if(type == 'posts'){
+				// doesnt have to use newRef, could use random UIDs since push occurs for user read
+				var newRef = self.ref.child('posts').push(postObj, function(){
+					self.ref.child('private').child(user.id).child('friends').once('value', function(snap){
+							snap.forEach(function(snap2){
+								var userId = snap2.name();
+								var pushId = newRef.name().toString();
+								self.ref.child('recentPosts').child(userId).push(pushId);
+							});
+						});
+					self.ref.push(postObj);
+				});
+			} else if (type == 'events'){
+				var newRef = self.ref.child('events').child(pushId).child('posts').push(postObj);
+				var pushId = newRef.name().toString();
+			}
+		});
+
+		document.getElementById('submitNewEvent').addEventListener('click', this.makeEvent);
+
 	},
+
+	makeEvent: function(e){
+		var event = {
+			name: $('#eName').value || '',
+			caption: $('#caption').value || '',
+			picUrl: $('#eventImage').src,
+			lat: Map.currMarker.getPosition().lat(),
+			lng: Map.currMarker.getPosition().lng(),
+			creator: userId,
+			timestamp: Firebase.ServerValue.TIMESTAMP
+		};
+		// make event
+	},
+
+
 	
 	makeInvites: function(snap){
 		this.invites[snap.name()] = snap.val();
