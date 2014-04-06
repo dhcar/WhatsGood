@@ -3,7 +3,10 @@ var Map = {
 	center : null,
 	MY_MAPTYPE_ID : 'custom_style',
 	geocoder : null,
+	directionsService : null,
+	directionsDisplay : null,
 	currMarker : null,
+	clickMarker : null,
 	soloToggle : true,
 	soloMarkers : [],
 	eventToggle : true,
@@ -12,6 +15,8 @@ var Map = {
 
 function initializeMap() {
   Map.geocoder = new google.maps.Geocoder();
+  Map.directionsService =  new google.maps.DirectionsService();
+  Map.directionsDisplay = new google.maps.DirectionsRenderer();
   var featureOpts = [
     {
 	    featureType: "poi",
@@ -34,8 +39,10 @@ function initializeMap() {
   Map.map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
+  Map.directionsDisplay.setMap(Map.map);
+
   var styledMapOptions = {
-    name: 'Custom Style'
+    name: 'Main Style'
   };
 
   var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
@@ -56,10 +63,11 @@ function initializeMap() {
   $(window).resize(function(){
   	Map.map.setCenter(Map.center);
   });
-  var el = document.getElementById("poop");
-  el.addEventListener("touchend", function() {
-  	removeLastMarker(false);
-  }, false);
+
+  // var el = document.getElementById("makeEventBack");
+  // el.addEventListener("touchend", function() {
+  // 	removeLastMarker(false);
+  // }, false);
 }
 
 function mapCurrent() {
@@ -83,12 +91,11 @@ function mapCurrent() {
 function addEventMarker(location, title) {
 	var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
-      '</div>'+
-      // '<h1 id="firstHeading" class="firstHeading">Event Name</h1>'+
-      '<div id="bodyContent">'+
-      '<b>Event Name</b> : '+
-      'Content'+
-      '</div>'+
+		    // '<h1 id="firstHeading" class="firstHeading">Event Name</h1>'+
+	      '<div id="bodyContent">'+
+		      '<b>Event Name</b> : '+ 'Content'+
+		      '<a class="button" onclick="calcRoute()">Directions</a>'
+	      '</div>'+
       '</div>';
 
   var infowindow = new google.maps.InfoWindow({
@@ -110,8 +117,8 @@ function addEventMarker(location, title) {
 	  icon: image
 	});
   google.maps.event.addListener(marker, 'click', function() {
-  	console.log(this);
     infowindow.open(Map.map,marker);
+    Map.clickMarker = marker;
   });
 	Map.eventMarkers.push(marker);
 }
@@ -224,6 +231,21 @@ function removeLastMarker(isSolo){
 		Map.eventMarkers[Map.eventMarkers.length-1].setMap(null);
 		Map.eventMarkers.remove(Map.eventMarkers.length-1);
 	}
+}
+
+function calcRoute(){
+  var request = {
+      origin: Map.currMarker.getPosition(),
+      destination: Map.clickMarker.getPosition(),
+      travelMode: google.maps.TravelMode.DRIVING
+  };
+  Map.directionsService.route(request, function(response, status){
+    if (status == google.maps.DirectionsStatus.OK) {
+      Map.directionsDisplay.setDirections(response);
+    } else {
+    	console.log(status);
+    }
+  });
 }
 
 function hackUINavigation(destinationHref){
