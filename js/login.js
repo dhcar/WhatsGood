@@ -32,7 +32,7 @@ function doLogin(){
             });
             console.log("user.id: " + user.id);
             if (user.id) {
-                window.location.redirect("index.html");
+                window.location.replace("index.html");
             }
         }
     });
