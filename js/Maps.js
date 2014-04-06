@@ -125,6 +125,7 @@ function addEventMarker(location, title) {
 }
 
 function addSoloMarker(location, title) {
+	console.log('add solo marker');
 	var image = {
 		url: 'images/People.png',
 		// This marker is 20 pixels wide by 32 pixels tall.
