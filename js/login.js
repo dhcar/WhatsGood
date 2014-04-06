@@ -32,7 +32,6 @@ function doLogin(){
             });
             console.log("user.id: " + user.id);
             if (user.id) {
-                console.log("fbUserId: " + fbUserId);
                 window.location.redirect("index.html");
             }
         }
