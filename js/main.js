@@ -363,11 +363,10 @@ function joinThis(){
 
 // app.setAuth();
 function stuff(){
-	if(app.user === null)
+	if(app.user === null){
 		app.setAuth();
 		setInterval(stuff, 2000);
-	else
-
+	}else
 		app.init();
 }
 $(document).ready( stuff );
