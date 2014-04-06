@@ -26,6 +26,7 @@ $(document).ready(function(){
 	});
 	
 	document.getElementById('newUser').addEventListener('click', function(){
+		var name     = document.getElementById('nameR').value;
 		var password = document.getElementById('passwordR').value;
 		var email    = document.getElementById('emailR').value;
 		auth.createUser(email, password, function(error, user){

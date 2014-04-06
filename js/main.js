@@ -68,6 +68,7 @@ function elt(tag, content, attrs) {
 // private
 // invites
 // users
+$(document).ready(app.setAuth);
 
 var app = {
 
@@ -89,7 +90,6 @@ var app = {
 
 	init: function(){
 		// read 
-		this.setAuth();
 		this.ref.child('users').child(user.id).on('value', this.setUserInfo);
 		this.ref.child(user.id).child('recentPosts').on('child_added', this.getPosts);
 		this.ref.child('private').child(user.id).child('friends').on('child_added', this.makeFriends);
