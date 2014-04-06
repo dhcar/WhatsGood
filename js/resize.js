@@ -26,7 +26,7 @@ function fileSelect(evt) {
             reader.onload = (function (tFile) {
                 return function (evt) {
                     var div = document.createElement('div');
-                    div.innerHTML = '<img style="width: 90px;" src="' + evt.target.result + '" />';
+                    div.innerHTML = '<img style="max-width: 400px; max-height: 400px;" src="' + evt.target.result + '" />';
                     document.getElementById('filesInfo').appendChild(div);
                 };
             }(file));
