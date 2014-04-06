@@ -132,5 +132,5 @@ function handleNoGeolocation(errorFlag) {
   };
 
   var infowindow = new google.maps.InfoWindow(options);
-  map.setCenter(options.position);
+  Map.map.setCenter(options.position);
 }
