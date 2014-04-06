@@ -158,8 +158,12 @@
 
   <script type="text/javascript">
     $( document ).ready(function() {
-      console.log( "ready!" );
       google.maps.event.addDomListener(window, 'load', initializeMap);
+      $('body').keypress(function (e) {
+        if (e.keyCode == 'c'.charCodeAt(0)) {
+          clearMarkers();
+        }
+      });
       makeInvite();
       $('.right-off-canvas-toggle').on('click', makeInvite);
     });
