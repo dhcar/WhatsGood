@@ -116,7 +116,7 @@ var app = {
 					self.ref.child('private').child(user.id).child('friends').once('value', function(snap){
 							snap.forEach(function(snap2){
 								var userId = snap2.name();
-								var pushId = newRef.name().toString();
+								var pushId = newRef.name();
 								self.ref.child('recentPosts').child(userId).push(pushId);
 							});
 						});
@@ -124,12 +124,11 @@ var app = {
 				});
 			} else if (type == 'events'){
 				var newRef = self.ref.child('events').child(pushId).child('posts').push(postObj);
-				var pushId = newRef.name().toString();
+				var pushId = newRef.name();
 			}
 		});
-
 		document.getElementById('submitNewEvent').addEventListener('click', this.makeEvent);
-
+		document.getElementById('searchFriends').addEventListener('keypress', this.searchFriends);
 	},
 
 	makeEvent: function(e){
@@ -142,10 +141,47 @@ var app = {
 			creator: userId,
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		};
+		var newRef = this.ref.child('events').push(event);
+		var pushId = newRef.name();
 		// make event
+		
 	},
 
-
+	searchFriends: function(){
+		/* Act on the event */
+		var input       = document.getElementById('searchFriends');
+		var search_term = input.value.toLowerCase();
+		console.log(search_term);
+		var resultsLoc       = document.getElementById('searchResultsList');
+		resultsLoc.innerHTML = '';
+		if (search_term.length < 2) return false;
+		var search_res = [];
+		
+		// convert app.friends to array
+		// 
+		var friendRay = [];
+		for (var prop in this.friends) {
+			if (this.friends.hasOwnProperty(prop)) {
+				friendRay.push(prop, this.friends[prop]);
+			}
+		}
+		// 
+		// scan array for an indexOf > -1 for the search_term
+		// 
+		//for (var i = 0; i < search_res.length; i++) {
+		for(var i=0; i < friendRay.length; i++){
+			var k     = i;
+			var userId  = friendRay[k][0];
+			var name  = friendRay[k][1];
+			var sp    = elt('span', name , {'class': 'search-result-text'});
+			var b     = elt('a', "Invite" , {'class': 'search-result-link right', "data-userId": userId, "data-url": app.ref.root().child('events').child(userId).toString()});
+				b.addEventListener("click", joinThis);
+			var e     = elt('li', [ b, sp ], {'class':'search-result'});
+			console.log(e);
+			parentEl.appendChild(e);
+		}
+		resultsLoc.appendChild(parentEl);
+	},
 	
 	makeInvites: function(snap){
 		this.invites[snap.name()] = snap.val();

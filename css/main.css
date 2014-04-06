@@ -1,3 +1,8 @@
+body, html{
+	max-height: 100vh;
+	overflow-y: auto;
+}
+
 #map-canvas {
 	top   : 0;
 	height: 100vh;
@@ -17,4 +22,8 @@
 
 .tabbar{
 	background-color: rgba(255,255,255,0);
+}
+
+#eventImage {
+    max-height: 35%;
 }
