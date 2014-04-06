@@ -71,7 +71,7 @@ function elt(tag, content, attrs) {
 
 var app = {
 
-	self: this,
+	// app: this,
 
 	auth: {},
 
@@ -112,18 +112,18 @@ var app = {
 			};
 			if(type == 'posts'){
 				// doesnt have to use newRef, could use random UIDs since push occurs for user read
-				var newRef = self.ref.child('posts').push(postObj, function(){
-					self.ref.child('private').child(app.user.id).child('friends').once('value', function(snap){
+				var newRef = app.ref.child('posts').push(postObj, function(){
+					app.ref.child('private').child(app.user.id).child('friends').once('value', function(snap){
 							snap.forEach(function(snap2){
 								var userId = snap2.name();
 								var pushId = newRef.name();
-								self.ref.child('recentPosts').child(userId).push(pushId);
+								app.ref.child('recentPosts').child(userId).push(pushId);
 							});
 						});
-					self.ref.push(postObj);
+					app.ref.push(postObj);
 				});
 			} else if (type == 'events'){
-				var newRef = self.ref.child('events').child(pushId).child('posts').push(postObj);
+				var newRef = app.ref.child('events').child(pushId).child('posts').push(postObj);
 				var pushId = newRef.name();
 			}
 		});
@@ -293,7 +293,7 @@ var app = {
 		console.log(combEvents);
 		var eventId = snap.val();
 		this.ref.child('events').child(eventId).once('value', function(snap2) {
-			self.events[eventId] = snap2.val();
+			app.events[eventId] = snap2.val();
 		});
 		// separate read for pictures
 	},
@@ -341,16 +341,16 @@ var app = {
 			// call post reference
 			// add to model
 			console.log(snap2.val());
-			self.posts[postId] = snap2.val();
+			app.posts[postId] = snap2.val();
 		});
 	},
 };
 
 function joinThis(){
-	var _self    = this;
+	var _app    = this;
 	var friendId = this.getAttribute('data-userId');
 	var url      = this.getAttribute('data-url');
-	// add self to dag members
+	// add app to dag members
 	var userObj, friendObj;
 	app.ref.root().child('users').child(app.user.id).once('value',function(snap){
 		var name = snap.child('name').val();
