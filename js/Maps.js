@@ -95,7 +95,7 @@ function addEventMarker(location, title) {
 		    // '<h1 id="firstHeading" class="firstHeading">Event Name</h1>'+
 	      '<div id="bodyContent">'+
 		      '<b>Event Name</b> : '+ 'Content'+
-		      '<a class="button" onclick="calcRoute()">Directions</a>'
+		      '<a class="button" onclick="calcRoute(); Map.map.setOptions({draggable:false});">Directions</a>'
 	      '</div>'+
       '</div>';
 

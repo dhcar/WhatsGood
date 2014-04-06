@@ -224,7 +224,7 @@
   <article  id="main" class="current">
     <div id='mapStuff'>
       <div id="directions-panel">
-        <a class='button' onclick="$('#directions-panel').hide();">Hide</a>
+        <a class='button' onclick="$('#directions-panel').hide(); Map.map.setOptions({draggable:true});">Hide</a>
       </div>
       <div id="map-canvas"></div>
     </div>
