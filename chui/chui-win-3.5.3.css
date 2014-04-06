@@ -898,11 +898,8 @@ div.toolbar {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 45pt;
   padding: 0 15px;
   background-color: #1a1a1a;
-  border-top: solid 1px #333333;
-  overflow: hidden;
   box-sizing: border-box;
   display: -ms-flexbox;
   -ms-flex-pack: start;
@@ -915,6 +912,7 @@ div.toolbar {
   -webkit-transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
   -webkit-transform: translate3d(0, 0, 0);
+  background-color:transparent;
 }
 .splitlayout > .master + .toolbar {
   left: 0;

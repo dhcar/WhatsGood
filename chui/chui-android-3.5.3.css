@@ -991,7 +991,6 @@ html[dir=rtl] article.paging.horizontal > section.current {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50px;
   padding: 0 15px;
   box-sizing: border-box;
   /* old flex box */
@@ -1016,8 +1015,7 @@ html[dir=rtl] article.paging.horizontal > section.current {
   padding: 0 16px;
   vertical-align: middle;
   background-color: #e2e2e2;
-  overflow: hidden;
-  border-top: solid 1px #acacac;
+  background-color:transparent;
 }
 .splitlayout > .master + .toolbar {
   left: 0;
