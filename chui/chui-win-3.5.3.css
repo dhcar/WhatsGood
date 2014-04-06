@@ -924,9 +924,6 @@ div.toolbar {
   left: 320px;
   background-color: #1a1a1a;
 }
-article.has-toolbar {
-  bottom: 45pt !important;
-}
 div.toolbar.current {
   -webkit-transform: translate3d(0, 0, 0) !important;
 }

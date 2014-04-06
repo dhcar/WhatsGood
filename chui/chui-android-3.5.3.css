@@ -1025,9 +1025,6 @@ html[dir=rtl] article.paging.horizontal > section.current {
 .splitlayout > .detail + .toolbar {
   left: 320px;
 }
-article.has-toolbar {
-  bottom: 50px !important;
-}
 div.toolbar.current {
   -webkit-transform: translate3d(0, 0, 0) !important;
   transform: translate3d(0, 0, 0) !important;
