@@ -87,7 +87,12 @@ var app = {
 
 	invites: {},
 
+	everything: {},
+
 	init: function(){
+		app.ref.on('value',function(snap){
+			app.everything = snap.val();
+		});
 		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
 		app.ref.child('recentPosts').child(app.user.id).on('child_added', app.getPosts);
