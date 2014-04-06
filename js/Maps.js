@@ -1,17 +1,42 @@
 var Map = {
 	map : null,
 	center : null,
-	currentPos : null, 
+	currentPos : null,
+	MY_MAPTYPE_ID : 'custom_style',
+	geocoder : null,
 	markers : []
 }
 
 function initializeMap() {
+  Map.geocoder = new google.maps.Geocoder();
+  var featureOpts = [
+    {
+	    featureType: "poi",
+	    elementType: "labels",
+	    stylers: [
+	      { visibility: "off" }
+	    ]
+	  }
+  ];
+
   var mapOptions = {
-    zoom: 15
+    zoom: 15,
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, Map.MY_MAPTYPE_ID]
+    },
+    mapTypeId: Map.MY_MAPTYPE_ID
   };
 
   Map.map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
+
+  var styledMapOptions = {
+    name: 'Custom Style'
+  };
+
+  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+  Map.map.mapTypes.set(Map.MY_MAPTYPE_ID, customMapType);
 
   mapCurrent();
 
@@ -61,6 +86,16 @@ function addMarker(location, title) {
 	  icon: image || null
 	});
 	Map.markers.push(marker);
+}
+
+function addAddressMarker(address) {
+  Map.geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      addMarker(results[0].geometry.location);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
 }
 
 function pinMarkers(map){
