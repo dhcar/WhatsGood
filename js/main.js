@@ -129,7 +129,7 @@ var app = {
 		});
 		document.getElementById('submitNewEvent').addEventListener('click', this.makeEvent);
 		document.getElementById('searchFriends').addEventListener('keypress', this.searchFriends);
-		document.getElementById('friendSearch').addEventListener('keypress', this.searchNewFriend)
+		document.getElementById('friendSearch').addEventListener('keypress', this.searchNewFriend);
 		function appendEventsList(){
 			// append events list
 			var wrapper = elt('ul', null , {'class':'list'});
