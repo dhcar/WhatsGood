@@ -282,6 +282,7 @@ var app = {
     	        }
     	    }
     	});
+    	app.auth = auth;
     },
 		// app.auth = new FirebaseSimpleLogin(app.ref, function(error, user){
 		// 	if (error) {
