@@ -50,7 +50,13 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
     document.getElementById('filesToUpload').onchange = function(){
         var files = document.getElementById('filesToUpload').files;
         for(var i = 0; i < files.length; i++) {
-            resizeAndUpload(files[i]);
+            resizeAndUpload(files[i], 'newPick');
+        }
+    };
+    document.getElementById('filesToUpload2').onchange = function(){
+        var files = document.getElementById('filesToUpload2').files;
+        for(var i = 0; i < files.length; i++) {
+            resizeAndUpload(files[i], 'newPick2');
         }
     };
 } else {
@@ -59,7 +65,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
  
 
 
-function resizeAndUpload(file) {
+function resizeAndUpload(file, id) {
 var reader = new FileReader();
     reader.onloadend = function() {
  
@@ -90,7 +96,7 @@ var reader = new FileReader();
         ctx.drawImage(this, 0, 0, tempW, tempH);
         var dataURL = canvas.toDataURL("image/jpeg");
 
-        document.getElementById('newPick').src = dataURL;
+        document.getElementById(id).src = dataURL;
  		
 
 

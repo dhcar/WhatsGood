@@ -478,7 +478,19 @@
           </li>
           <li>
             <label>Add Image:</label>
-            <a class='button' onclick=""><img src="images/Camera.png"></a>
+            
+
+      <div class="row">
+      <label for="fileToUpload">Select Files to Upload</label><br />
+      <input type="file" name="filesToUpload2" id="filesToUpload2" accept="image/*"/>
+      <img id="newPick2" src='' style="max-width: 400px; max-height: 400px;"/>
+    </div>
+    <div class="row">
+      <button id="newPickSubmit" >Submit</button>
+    </div>
+
+
+<!--             <a class='button' id="newPickSubmit" onclick=""><img src="images/Camera.png"></a>-->
           </li>
           <li>
             <ul class='list select'>
