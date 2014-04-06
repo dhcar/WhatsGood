@@ -542,11 +542,11 @@
     <article id='imageTesting' class='next'>
     <div class="row">
       <label for="fileToUpload">Select Files to Upload</label><br />
-      <input type="file" name="filesToUpload[]" id="filesToUpload" multiple="multiple" />
-      <output id="filesInfo"></output>
+      <input type="file" name="filesToUpload" id="filesToUpload"/>
+      <img id="filesInfo" src='' style="max-width: 400px; max-height: 400px;"/>
     </div>
     <div class="row">
-      <input type="submit" value="Upload" />
+      <button id="imageSubmitButton" >Submit</button>
     </div>
   </article>
 

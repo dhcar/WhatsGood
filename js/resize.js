@@ -10,34 +10,37 @@
 //
 
 // for image preview
-function fileSelect(evt) {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-        var files = evt.target.files;
+// function fileSelect(evt) {
+//     if (window.File && window.FileReader && window.FileList && window.Blob) {
+//         var files = evt.target.files;
  
-        var result = '';
-        var file;
-        for (var i = 0; file = files[i]; i++) {
-            // if the file is not an image, continue
-            if (!file.type.match('image.*')) {
-                continue;
-            }
+//         var result = '';
+//         var file = files[0];
+//         // for (var i = 0; file = files[0]; i++) {
+//         //     // if the file is not an image, continue
+//         //     var flag=0;
+//         //    if (!file.type.match('image.*')) {
+//         //        flag = 1;
+//         //    }
  
-            reader = new FileReader();
-            reader.onload = (function (tFile) {
-                return function (evt) {
-                    var div = document.createElement('div');
-                    div.innerHTML = '<img style="max-width: 400px; max-height: 400px;" src="' + evt.target.result + '" />';
-                    document.getElementById('filesInfo').appendChild(div);
-                };
-            }(file));
-            reader.readAsDataURL(file);
-        }
-    } else {
-        alert('The File APIs are not fully supported in this browser.');
-    }
-}
+//             reader = new FileReader();
+//             reader.onload = (function (tFile) {
+//                 return function (evt) {
+
+//                     document.getElementById('filesInfo').src = evt.target.result;
+//                 };
+//             }(file));
+//             reader.readAsDataURL(file);
+//         //     if (flag == 0){
+//         //     	break;
+//         //     }
+//         // }
+//     } else {
+//         alert('The File APIs are not fully supported in this browser.');
+//     }
+// }
  
-document.getElementById('filesToUpload').addEventListener('change', fileSelect, false);
+// document.getElementById('filesToUpload').addEventListener('change', fileSelect, false);
 
 
 
@@ -86,7 +89,10 @@ var reader = new FileReader();
         var ctx = canvas.getContext("2d");
         ctx.drawImage(this, 0, 0, tempW, tempH);
         var dataURL = canvas.toDataURL("image/jpeg");
- 
+
+        document.getElementById('filesInfo').src = dataURL;
+ 		
+
 
 // do firebase instead of this bullshit
 
