@@ -75,7 +75,7 @@ var app = {
 
 	auth: {},
 
-	ref: new Firebase('https://whatsgood.firebaseio.com/'),
+	ref: {},
 
 	user: {},
 
@@ -305,6 +305,7 @@ var app = {
 	},
 
 	setAuth: function(){
+		app.ref = new Firebase('https://whatsgood.firebaseio.com/');
 		console.log('set auth');
 		var auth = new FirebaseSimpleLogin(app.ref, function(error, user) {
     	    if (error) {
@@ -358,4 +359,5 @@ function joinThis(){
 	});
 }
 
-$(document).ready(app.setAuth);
+app.setAuth();
+$(document).ready(app.init);
