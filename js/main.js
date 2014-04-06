@@ -357,6 +357,7 @@ $(document).ready( stuff );
 				if (app.posts.hasOwnProperty(prop)) {
 					var post = app.posts.prop;
 					var creatorName;
+					console.log(post);
 					console.log('display posts on map');
 					app.ref.child('users').child(post.creator).child('name').once( 'value', function(snap) {
 						console.log('displayPostsOnMap()');
