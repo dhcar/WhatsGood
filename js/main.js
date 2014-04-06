@@ -92,6 +92,8 @@ var app = {
 	init: function(){
 		app.ref.on('value',function(snap){
 			app.everything = snap.val();
+			app.posts = app.everything.posts;
+			app.friends = app.everything.friends;
 		});
 		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
