@@ -267,17 +267,18 @@ var app = {
 	},
 
 	setAuth: function(){
-		if(!self.auth){
-			self.auth = new FirebaseSimpleLogin(app.ref, function(error,user){
-				if (error) {
-					console.log(error);
-					auth.login();
-				} else if (user) {
-					self.user = user;
-					console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-				}
-			});
-		}
+		app.auth = new FirebaseSimpleLogin(app.ref, function(error,user){
+			if (error) {
+				console.log(error);
+				auth.login('facebook', {
+  					rememberMe: true,
+  					scope: 'email'
+				});
+			} else if (user) {
+				self.user = user;
+				console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+			}
+		});
 	},
 
 	getPosts: function(snap){
