@@ -284,13 +284,13 @@
        ///////////////////////
        // Setup Deletable list
        ///////////////////////
-       $.UIDeletable({
-          list: '#deletables', 
-          callback: function(item) {
-            var text = $(item).siblings('h3').text();
-            $('#deletable-response').html('You deleted: <strong>' + text + '</strong>');
-          }
-        });
+       // $.UIDeletable({
+       //    list: '#deletables', 
+       //    callback: function(item) {
+       //      var text = $(item).siblings('h3').text();
+       //      $('#deletable-response').html('You deleted: <strong>' + text + '</strong>');
+       //    }
+       //  });
 
       ///////////////////
       // Initialize Popup
@@ -355,17 +355,17 @@
         };
         
         // Initialize Popover:
-        $('#showPopover1').UIPopover({
-          id: 'fruitsPopover', 
-          title: "Fruits", 
-          callback: fillPopover1
-        });
+        // $('#showPopover1').UIPopover({
+        //   id: 'fruitsPopover', 
+        //   title: "Fruits", 
+        //   callback: fillPopover1
+        // });
         // Initialize Popover:
-        $('#showPopover2').UIPopover({
-          id: 'desertsPopover', 
-          title: "Deserts", 
-          callback: fillPopover2
-        });      
+        // $('#showPopover2').UIPopover({
+        //   id: 'desertsPopover', 
+        //   title: "Deserts", 
+        //   callback: fillPopover2
+        // });      
         
         ///////////////////////////
         // Setup Horizontal Paging:
@@ -410,7 +410,7 @@
   </style>
 </head>
 <body>
-  <nav>
+  <!-- <nav>
     <h1>Demo</h1>
   </nav>
   <article id="main" class="current">
@@ -442,8 +442,8 @@
         </li>
       </ul>
     </section>
-  </article>
-  <nav>
+  </article> -->
+  <!-- <nav>
     <a class='button back'>Demo</a>
     <h1>Segmented Control</h1>
   </nav>
@@ -522,24 +522,74 @@
         </div>
       </div>
     </section>
-  </article>
+  </article> -->
   <nav>
-    <a class='button back'>Demo</a>
-    <h1>Map</h1>
+    <a class='button'>Place Holder</a>
+    <h1>What's Good</h1>
     <a class='button align-flush'>Place Holder</a>
   </nav>
-  <article id='googmapsTesting' class='next'>
+  <article  id="main" class="current">
     <div id="map-canvas"></div>
-  </article>
-  <div class='toolbar next horizontal centered'>
+    <div class='toolbar current horizontal centered'>
       <a class='button' onclick="mapCurrent()"><img src="images/Location.png"></a>
-      <a class='button' onclick=""><img src="images/List.png"></a>
-      <a class='button' onclick=""><img src="images/Camera.png"></a>
+      <li data-goto="event-list" class='nav'>
+        <a class='button' onclick=""><img src="images/List.png"></a>
+      </li>
+      <li data-goto="image-event" class='nav'>
+        <a class='button' onclick=""><img src="images/Camera.png"></a>
+      </li>
       <a class='button' onclick="toggleMarkers(false)"><img src="images/Group.png"></a>
       <a class='button' onclick="toggleMarkers(true)"><img src="images/People.png"></a>
-  </div>
+    </div>
+  </article>
   <nav>
-    <a class='button back'>Demo</a>
+    <a class='button back'>Map</a>
+    <h1>Event List</h1>
+  </nav>
+  <article id='event-list' class='next'>
+    <section>
+      <ul class='list select'>
+        <li class='selected'>
+          <h3>Go eat something</h3>
+        </li>
+        <li>
+          <h3>Take a nap</h3>
+        </li>
+        <li>
+          <h3>Get some work done</h3>
+        </li>
+        <li>
+          <h3>Play a game</h3>
+        </li>
+      </ul>
+      <p><strong>You are going to: </strong><span id="select-response"></span></p>
+    </section>
+  </article>
+  <nav>
+    <a class='button back'>Map</a>
+    <h1>Make Event</h1>
+  </nav>
+  <article id='image-event' class='next'>
+    <section>
+      <ul class='list select'>
+        <li class='selected'>
+          <h3>Go eat something</h3>
+        </li>
+        <li>
+          <h3>Take a nap</h3>
+        </li>
+        <li>
+          <h3>Get some work done</h3>
+        </li>
+        <li>
+          <h3>Play a game</h3>
+        </li>
+      </ul>
+      <p><strong>You are going to: </strong><span id="select-response"></span></p>
+    </section>
+  </article>
+  <!-- <nav>
+    <a class='button back'>Map</a>
     <h1>Deletable List</h1>
   </nav>
   <article id='select-article' class='next'>
@@ -1058,6 +1108,6 @@ It droppeth as the gentle rain from heaven upon the place beneath. It is twice b
       </ul>
       <p>Example of icons in list items.</p>
     </section>
-  </article>
+  </article> -->
 </body>
 </html>
