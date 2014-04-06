@@ -77,7 +77,7 @@ var app = {
 
 	ref: {},
 
-	user: {},
+	user: null,
 
 	posts: {},
 
@@ -360,4 +360,6 @@ function joinThis(){
 }
 
 app.setAuth();
-$(document).ready(app.init);
+$(document).ready(
+	(function(){ while(app.user === null){} app.init();})
+	);
