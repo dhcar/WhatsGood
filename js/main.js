@@ -369,7 +369,7 @@ $(document).ready( stuff );
 					// post.lat;
 					// post.lng;
 					// post.picUrl;
-					addSoloMarker(new google.maps.LatLng(post.lat, post.lng), creatorName);
+					addSoloMarker(new google.maps.LatLng(post.lat, post.lng), creatorName, post.picUrl);
 				}
 			}
 		}

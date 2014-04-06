@@ -124,12 +124,12 @@ function addEventMarker(location, title) {
 	Map.eventMarkers.push(marker);
 }
 
-function addSoloMarker(location, title) {
+function addSoloMarker(location, title, imgURL) {
 	console.log('add solo marker');
 	var image = {
-		url: 'images/People.png',
+		url: imgURL,
 		// This marker is 20 pixels wide by 32 pixels tall.
-		scaledSize: new google.maps.Size(20, 20),
+		scaledSize: new google.maps.Size(100, 100),
 		// The origin for this image is 0,0.
 		origin: new google.maps.Point(0,0)
 	};
