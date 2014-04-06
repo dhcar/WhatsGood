@@ -363,6 +363,7 @@ $(document).ready( stuff );
 						console.log('displayPostsOnMap()');
 						creatorName = snap.val();
 					});
+					window.alert(post.picUrl);
 					// post.caption;
 					// post.creator;
 					// post.lat;
