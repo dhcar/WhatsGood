@@ -250,7 +250,7 @@ var app = {
 	},
 
 	setUserInfo: function(snap){
-		console.log(snap);
+		console.log(snap.val());
 		app.user = snap.val();
 	},
 
