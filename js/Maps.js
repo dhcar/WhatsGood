@@ -57,7 +57,9 @@ function initializeMap() {
   	Map.map.setCenter(Map.center);
   });
   var el = document.getElementById("poop");
-  el.addEventListener("touchend", handleEnd, false);
+  el.addEventListener("touchend", function() {
+  	removeLastMarker(false);
+  }, false);
 }
 
 function mapCurrent() {
