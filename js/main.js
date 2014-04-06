@@ -113,7 +113,7 @@ var app = {
 			if(type == 'posts'){
 				// doesnt have to use newRef, could use random UIDs since push occurs for user read
 				var newRef = self.ref.child('posts').push(postObj, function(){
-					self.ref.child('private').child(user.id).child('friends').once('value', function(snap){
+					self.ref.child('private').child(app.user.id).child('friends').once('value', function(snap){
 							snap.forEach(function(snap2){
 								var userId = snap2.name();
 								var pushId = newRef.name();
