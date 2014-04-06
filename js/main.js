@@ -337,7 +337,7 @@ var app = {
 		console.log('get posts');
 		var postId = snap.val();
 		console.log(postId);
-		self.ref.child('posts').child(postId).once('value', function(snap2) {
+		app.ref.child('posts').child(postId).once('value', function(snap2) {
 			// call post reference
 			// add to model
 			console.log(snap2.val());
