@@ -103,7 +103,7 @@ var app = {
 			var type = this.getAttribute('data-pic-type');
 			console.log('submit pic');
 			var postObj = {
-				caption: caption || '',
+				caption: $('#caption') || '',
 				picUrl: blob,
 				lat: Map.currMarker.getPosition().lat(),
 				lng: Map.currMarker.getPosition().lng(),
@@ -198,7 +198,7 @@ var app = {
 	makeEvent: function(e){
 		var event = {
 			name: $('#eName').value || '',
-			caption: $('#caption').value || '',
+			caption: $('#eventCaption').value || '',
 			picUrl: $('#eventImage').src,
 			lat: Map.currMarker.getPosition().lat(),
 			lng: Map.currMarker.getPosition().lng(),
