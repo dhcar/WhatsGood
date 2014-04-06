@@ -361,11 +361,13 @@ function joinThis(){
 	});
 }
 
-app.setAuth();
+// app.setAuth();
 function stuff(){
 	if(app.user === null)
+		app.setAuth();
 		setInterval(stuff, 2000);
 	else
+
 		app.init();
 }
 $(document).ready( stuff );
