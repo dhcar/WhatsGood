@@ -77,7 +77,7 @@ var app = {
 
 	ref: new Firebase('https://whatsgood.firebaseio.com/'),
 
-	// user: {},
+	user: {},
 
 	posts: {},
 
@@ -90,7 +90,7 @@ var app = {
 	init: function(){
 		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
-		app.ref.child(app.user.id).child('recentPosts').on('child_added', app.getPosts);
+		app.ref.child('recentPosts').child(app.user.id).on('child_added', app.getPosts);
 		app.ref.child('private').child(app.user.id).child('friends').on('child_added', app.makeFriends);
 		app.ref.child('private').child(app.user.id).child('events').on('child_added', app.combEvents);
 		app.ref.child('invites').child(app.user.id).on('child_added', app.makeInvites);
