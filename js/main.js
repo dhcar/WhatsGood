@@ -129,6 +129,7 @@ var app = {
 		});
 		document.getElementById('submitNewEvent').addEventListener('click', this.makeEvent);
 		document.getElementById('searchFriends').addEventListener('keypress', this.searchFriends);
+		document.getElementById('friendSearch').addEventListener('keypress', this.searchNewFriend)
 		function appendEventsList(){
 			// append events list
 			var wrapper = elt('ul', null , {'class':'list'});
@@ -244,6 +245,40 @@ var app = {
 		}
 		resultsLoc.appendChild(parentEl);
 	},
+
+	searchNewFriends: function(){
+		/* Act on the event */
+		var input       = this;
+		var search_term = input.value.toLowerCase();
+		console.log(search_term);
+		var resultsLoc       = document.getElementById('friendResultsList');
+		resultsLoc.innerHTML = '';
+		if (search_term.length < 2) return false;
+		var search_res = [];
+		// convert app.friends to array
+		// 
+		var friendRay = [];
+		for (var prop in this.friends) {
+			if (this.friends.hasOwnProperty(prop)) {
+				friendRay.push(prop, this.friends[prop]);
+			}
+		}
+		// 
+		// scan array for an indexOf > -1 for the search_term
+		// 
+		for(var i=0; i < friendRay.length; i++){
+			var k     = i;
+			var userId  = friendRay[k][0];
+			var name  = friendRay[k][1];
+			var sp    = elt('span', name , {'class': 'search-result-text'});
+			var b     = elt('a', "Invite" , {'class': 'search-result-link right', "data-userId": userId, "data-url": app.ref.root().child('events').child(userId).toString()});
+				b.addEventListener("click", joinThis);
+			var e     = elt('li', [ b, sp ], {'class':'search-result'});
+			console.log(e);
+			parentEl.appendChild(e);
+		}
+		resultsLoc.appendChild(parentEl);
+	},
 	
 	makeInvites: function(snap){
 		this.invites[snap.name()] = snap.val();
@@ -306,5 +341,21 @@ var app = {
 		});
 	},
 };
+
+function joinThis(){
+	var _self    = this;
+	var friendId = this.getAttribute('data-userId');
+	var url      = this.getAttribute('data-url');
+	// add self to dag members
+	var userObj, friendObj;
+	app.ref.root().child('users').child(app.user.id).once('value',function(snap){
+		var name = snap.child('name').val();
+		app.ref.root().child('private').child(friendId).child(app.user.id).set(name);
+		snap.ref().child('users').child(friendId).child('name').once('value', function(snap2){
+			var friendName = snap2.val();
+			app.ref.root().child('private').child(app.user.id).child('friends').child(friendId).set(friendName);
+		});
+	});
+}
 
 $(document).ready(app.setAuth);
