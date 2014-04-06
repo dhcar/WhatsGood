@@ -73,24 +73,24 @@ var app = {
 
 	self: this,
 
-	// auth: {},
+	auth: {},
 
 	ref: new Firebase('https://whatsgood.firebaseio.com/'),
 
-	// user: {},
+	user: {},
 
-	// posts: {},
+	posts: {},
 
-	// events: {},
+	events: {},
 
-	// friends: {},
+	friends: {},
 
-	// invites: {},
+	invites: {},
 
 	init: function(){
 		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
-		app.ref.child('recentPosts').child(app.user.id).on('child_added', app.getPosts);
+		app.ref.child(app.user.id).on('child_added', app.getPosts);
 		app.ref.child('private').child(app.user.id).child('friends').on('child_added', app.makeFriends);
 		app.ref.child('private').child(app.user.id).child('events').on('child_added', app.combEvents);
 		app.ref.child('invites').child(app.user.id).on('child_added', app.makeInvites);
