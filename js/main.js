@@ -174,7 +174,9 @@ var app = {
 				if (app.posts.hasOwnProperty(prop)) {
 					var post = app.posts.prop;
 					var creatorName;
+					console.log('display posts on map');
 					app.ref.child('users').child(post.creator).child('name').once( 'value', function(snap) {
+						console.log('displayPostsOnMap()');
 						creatorName = snap.val();
 					});
 					// post.caption;
