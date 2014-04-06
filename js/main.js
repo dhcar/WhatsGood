@@ -89,7 +89,7 @@ var app = {
 
 	init: function(){
 		// read 
-		this.ref.child('users').child(user.id).on('value', this.setUserInfo);
+		this.ref.child('users').child(this.auth.id).on('value', this.setUserInfo);
 		this.ref.child(user.id).child('recentPosts').on('child_added', this.getPosts);
 		this.ref.child('private').child(user.id).child('friends').on('child_added', this.makeFriends);
 		this.ref.child('private').child(user.id).child('events').on('child_added', this.combEvents);
@@ -266,13 +266,9 @@ var app = {
 	},
 
 	setAuth: function(){
-		app.auth = new FirebaseSimpleLogin(app.ref, function(error,user){
+		this.auth = new FirebaseSimpleLogin(app.ref, function(error,user){
 			if (error) {
 				console.log(error);
-				auth.login('facebook', {
-  					rememberMe: true,
-  					scope: 'email'
-				});
 			} else if (user) {
 				self.user = user;
 				console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
