@@ -266,7 +266,7 @@ var app = {
 	},
 
 	setAuth: function(){
-		var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+		var auth = new FirebaseSimpleLogin(app.ref, function(error, user) {
     	    if (error) {
     	        console.log('doLogin');
     	        console.log(error);
