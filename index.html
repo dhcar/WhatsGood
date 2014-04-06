@@ -415,6 +415,7 @@
   <nav>
     <!-- <a class='button'>Place Holder</a> -->
     <h1>What's Good</h1>
+    <!-- <img src="images/Location.png"> -->
     <!-- <a class='button align-flush'>Place Holder</a> -->
   </nav>
   <article  id="main" class="current">
@@ -443,7 +444,7 @@
   <article id='image-event' class='next'>
     <section>
       <div class="row">
-      <label for="fileToUpload">Select Files to Upload</label><br />
+      <label for="fileToUpload">Select or Take Image to Upload</label><br />
       <input type="file" name="filesToUpload" id="filesToUpload" accept="image/*"/>
       <img id="newPick" src='' style="max-width: 400px; max-height: 400px;"/>
     </div>
@@ -453,7 +454,7 @@
   </section>
   </article>
   <nav>
-    <a class='button back'>Map</a>
+    <a class='button back' onclick="removeLastMarker(false)">Map</a>
     <h1>Make Event</h1>
     <div class='segmented paging horizontal align-flush'>
        <a class='button' href='javascript:void(null)' title='previous panel'></a>
@@ -469,7 +470,7 @@
             <input type="text" id="eName" value="Example">
           </li>
           <li>
-            <label>Time: <span id='timeValue'></span></label>
+            <label>Minutes From Now: <span id='timeValue'></span></label>
             <input type="range" id="timeControl" value="0" min="0" max="60">
           </li>
           <li>

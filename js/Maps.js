@@ -187,7 +187,19 @@ function clearMarkers(isSolo){
 		Map.soloMarkers = [];
 		mapCurrent();
 	}else{
+		hideMarkers(false);
+		Map.eventMarkers = [];
+		mapCurrent();
+	}
+}
 
+function removeLastMarker(isSolo){
+	if(isSolo){
+		Map.soloMarkers[Map.soloMarkers.length-1].setMap(null);
+		Map.soloMarkers.remove(Map.soloMarkers.length-1);
+	}else{
+		Map.eventMarkers[Map.eventMarkers.length-1].setMap(null);
+		Map.eventMarkers.remove(Map.eventMarkers.length-1);
 	}
 }
 
