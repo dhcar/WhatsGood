@@ -311,12 +311,13 @@ var app = {
     	    if (error) {
     	        console.log('doLogin');
     	        console.log(error);
-    	        auth.logout();
-    	        window.location.reload('login.html');
     	    } else if (!error) {
     	        console.log("user.id: " + user.id);
     	        if (user.id) {
     	            app.user = user;
+    	        } else {
+    	        	auth.logout();
+    	        	window.location.reload('login.html');
     	        }
     	    }
     	});
