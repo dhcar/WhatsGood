@@ -50,6 +50,7 @@ function initializeMap() {
 
   google.maps.event.addListener(Map.map, 'dblclick', function(event) {
     addEventMarker(event.latLng);
+    hackUINavigation('#make-event');
   });
 
   $(window).resize(function(){
@@ -188,6 +189,12 @@ function clearMarkers(isSolo){
 	}else{
 
 	}
+}
+
+function hackUINavigation(destinationHref){
+    $(destinationHref).addClass('navigable');
+    var destination = $(destinationHref);
+    $.UIGoToArticle(destination);
 }
 
 function handleNoGeolocation(errorFlag) {

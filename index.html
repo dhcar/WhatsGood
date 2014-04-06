@@ -532,12 +532,8 @@
     <div id="map-canvas"></div>
     <div class='toolbar current horizontal centered'>
       <a class='button' onclick="mapCurrent()"><img src="images/Location.png"></a>
-      <li data-goto="event-list" class='nav'>
-        <a class='button' onclick=""><img src="images/List.png"></a>
-      </li>
-      <li data-goto="image-event" class='nav'>
-        <a class='button' onclick=""><img src="images/Camera.png"></a>
-      </li>
+      <a class='button' onclick="hackUINavigation('#event-list')"><img src="images/List.png"></a>
+      <a class='button' onclick="hackUINavigation('#image-event')"><img src="images/Camera.png"></a>
       <a class='button' onclick="toggleMarkers(false)"><img src="images/Group.png"></a>
       <a class='button' onclick="toggleMarkers(true)"><img src="images/People.png"></a>
     </div>
@@ -567,9 +563,32 @@
   </article>
   <nav>
     <a class='button back'>Map</a>
-    <h1>Make Event</h1>
+    <h1>Image Event</h1>
   </nav>
   <article id='image-event' class='next'>
+    <section>
+      <ul class='list select'>
+        <li class='selected'>
+          <h3>Go eat something</h3>
+        </li>
+        <li>
+          <h3>Take a nap</h3>
+        </li>
+        <li>
+          <h3>Get some work done</h3>
+        </li>
+        <li>
+          <h3>Play a game</h3>
+        </li>
+      </ul>
+      <p><strong>You are going to: </strong><span id="select-response"></span></p>
+    </section>
+  </article>
+  <nav>
+    <a class='button back'>Map</a>
+    <h1>Make Event</h1>
+  </nav>
+  <article id='make-event' class='next'>
     <section>
       <ul class='list select'>
         <li class='selected'>
