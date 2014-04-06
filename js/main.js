@@ -90,17 +90,17 @@ var app = {
 	init: function(){
 		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
-		this.ref.child(this.user.id).child('recentPosts').on('value', this.getPosts);
-		this.ref.child('private').child(this.user.id).child('friends').on('value', this.makeFriends);
-		this.ref.child('private').child(this.user.id).child('events').on('value', this.combEvents);
-		this.ref.child('invites').child(this.user.id).on('value', this.makeInvites);
+		app.ref.child(app.user.id).child('recentPosts').on('child_added', app.getPosts);
+		app.ref.child('private').child(app.user.id).child('friends').on('child_added', app.makeFriends);
+		app.ref.child('private').child(app.user.id).child('events').on('child_added', app.combEvents);
+		app.ref.child('invites').child(app.user.id).on('child_added', app.makeInvites);
 		// 
 		// firebase events
 		// 
 		var newPicSubmit = document.getElementById('newPicSubmit');
 		newPicSubmit.addEventListener('click', function(e){
-			var blob = this.src;
-			var type = this.getAttribute('data-pic-type');
+			var blob = app.src;
+			var type = app.getAttribute('data-pic-type');
 			console.log('submit pic');
 			var postObj = {
 				caption: $('#caption') || '',
