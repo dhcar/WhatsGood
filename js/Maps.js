@@ -64,10 +64,10 @@ function initializeMap() {
   	Map.map.setCenter(Map.center);
   });
 
-  // var el = document.getElementById("makeEventBack");
-  // el.addEventListener("touchend", function() {
-  // 	removeLastMarker(false);
-  // }, false);
+  var el = document.getElementById("makeEventBack");
+  el.addEventListener("touchend", function() {
+  	removeLastMarker(false);
+  }, false);
 }
 
 function mapCurrent() {
@@ -225,11 +225,9 @@ function clearMarkers(isSolo){
 
 function removeLastMarker(isSolo){
 	if(isSolo){
-		Map.soloMarkers[Map.soloMarkers.length-1].setMap(null);
-		Map.soloMarkers.remove(Map.soloMarkers.length-1);
+		Map.soloMarkers.pop().setMap(null);
 	}else{
-		Map.eventMarkers[Map.eventMarkers.length-1].setMap(null);
-		Map.eventMarkers.remove(Map.eventMarkers.length-1);
+		Map.eventMarkers.pop().setMap(null);
 	}
 }
 
