@@ -355,7 +355,7 @@ $(document).ready( stuff );
 			//  /posts/pushId object
 			for (var prop in app.posts) {
 				if (app.posts.hasOwnProperty(prop)) {
-					var post = app.posts.prop;
+					var post = app.posts[prop];
 					var creatorName;
 					console.log(post);
 					console.log('display posts on map');
