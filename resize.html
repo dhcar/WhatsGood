@@ -533,11 +533,27 @@
     <a class='button back'>Demo</a>
     <h1>Image Test</h1>
   </nav>
-  <article id='imageTesting' class='next'>
-  	<img src="" alt="" id="imagePreview">
-  	<input type="file" id="imageInput">
-  </article>
-  <!-- 	IMPORTANT SHIT FOR ERIC -->
+  <!-- 	for image preview -->
+
+<!--   <article id='imageTesting' class='next'>
+    <img src="" alt="" id="imagePreview">
+    <input type="file" id="imageInput">
+  </article> -->
+
+<form enctype="multipart/form-data" method="post" action="upload.php">
+    <div class="row">
+      <label for="fileToUpload">Select Files to Upload</label><br />
+      <input type="file" name="filesToUpload[]" id="filesToUpload" multiple="multiple" />
+      <output id="filesInfo"></output>
+    </div>
+    <div class="row">
+      <input type="submit" value="Upload" />
+    </div>
+  </form>
+
+  <!--  for image resizing -->
+
+
   <nav>
     <a class='button back'>Demo</a>
     <h1>Deletable List</h1>
