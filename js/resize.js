@@ -27,7 +27,7 @@
 //             reader.onload = (function (tFile) {
 //                 return function (evt) {
 
-//                     document.getElementById('filesInfo').src = evt.target.result;
+//                     document.getElementById('newPick').src = evt.target.result;
 //                 };
 //             }(file));
 //             reader.readAsDataURL(file);
@@ -90,7 +90,7 @@ var reader = new FileReader();
         ctx.drawImage(this, 0, 0, tempW, tempH);
         var dataURL = canvas.toDataURL("image/jpeg");
 
-        document.getElementById('filesInfo').src = dataURL;
+        document.getElementById('newPick').src = dataURL;
  		
 
 
@@ -98,7 +98,7 @@ var reader = new FileReader();
 
   //      var xhr = new XMLHttpRequest();
   //      xhr.onreadystatechange = function(ev){
-  //          document.getElementById('filesInfo').innerHTML = 'Done!';
+  //          document.getElementById('newPick').innerHTML = 'Done!';
   //      };
   //
   //      xhr.open('POST', 'uploadResized.php', true);
