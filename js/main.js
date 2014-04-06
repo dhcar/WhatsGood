@@ -364,9 +364,12 @@ function joinThis(){
 // app.setAuth();
 function stuff(){
 	if(app.user === null){
+		console.log(app.user);
 		app.setAuth();
-		setInterval(stuff, 2000);
-	}else
+		setTimeout(stuff, 5000);
+	}else{
+		console.log("kjsd");
 		app.init();
+	}
 }
 $(document).ready( stuff );
