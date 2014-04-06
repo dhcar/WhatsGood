@@ -56,6 +56,8 @@ function initializeMap() {
   $(window).resize(function(){
   	Map.map.setCenter(Map.center);
   });
+  var el = document.getElementById("poop");
+  el.addEventListener("touchend", handleEnd, false);
 }
 
 function mapCurrent() {
