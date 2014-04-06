@@ -45,6 +45,24 @@ function randomString(length, chars) {
     return result;
 }
 
+function elt(tag, content, attrs) {
+   var e = document.createElement(tag);
+   if (typeof content === "string") {
+     setTextContent(e, content);
+   } else if (content) {
+     for (var i = 0; i < content.length; ++i) { e.appendChild(content[i]); }
+   }
+   for(var attr in (attrs || { })) {
+     e.setAttribute(attr, attrs[attr]);
+   }
+   return e;
+ }
+
+ function setTextContent(e, str) {
+   e.innerHTML = "";
+   e.appendChild(document.createTextNode(str));
+ }
+
 // posts
 // events
 // private
@@ -71,9 +89,28 @@ var app = {
 
 	init: function(){
 		// read 
+		self.setAuth();
+		self.ref.child('users').child(user.id).on('value', this.setUserInfo);
 		self.ref.child(user.id).child('recentPosts').on('child_added', this.getPosts);
-		self.setUser();
 		self.ref.child('private').child(user.id).child('friends').on('child_added', this.makeFriends);
+		self.ref.child('private').child(user.id).child('events').on('child_added', this.combEvents);
+		self.ref.child('invites').child(user.id).on('child_added', this.makeInvites);
+	},
+	
+	makeInvites: function(snap){
+		this.invites[snap.name()] = snap.val();
+	},
+
+	setUserInfo: function(snap){
+		this.user = snap.val();
+	},
+
+	combEvents: function(snap){
+		var eventId = snap.val();
+		this.ref.child('events').child(eventId).once('value', function(snap2) {
+			self.events[eventId] = snap2.val();
+		});
+		// separate read for pictures
 	},
 
 	makeFriends: function(snap){
@@ -81,7 +118,7 @@ var app = {
 		this.friends[userId] = snap.val();
 	},
 
-	setUser: function(){
+	setAuth: function(){
 		if(!self.auth){
 			self.auth = new FirebaseSimpleLogin(app.ref, function(error,user){
 				if (error) {
@@ -96,7 +133,7 @@ var app = {
 
 	getPosts: function(snap){
 		var postId = snap.val;
-		self.ref.child(postId).once('value', function(snap2) {
+		self.ref.child('posts').child(postId).once('value', function(snap2) {
 			// call post reference
 			// add to model
 			self.posts[postId] = snap2.val();
@@ -104,4 +141,3 @@ var app = {
 	},
 
 };
-
