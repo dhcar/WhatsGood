@@ -4,8 +4,10 @@
 }
 
 .toolbar img {
-	height: 3.2rem;
-	width : 3.2rem;
+	max-height: 50px;
+	max-width : 50px;
+	height    : 3.2rem;
+	width     : 3.2rem;
 }
 
 #main > section{
