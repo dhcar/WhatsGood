@@ -132,19 +132,18 @@ var app = {
 
 	},
 
-	// makeEvent: function(e){
-	// 	var blob = makeEvent
-	// 	var event = {
-	// 		caption: caption || '',
-	// 		picUrl: blob,
-	// 		lat: Map.currMarker.getPosition().lat(),
-	// 		lng: Map.currMarker.getPosition().lng(),
-	// 		creator: userId,
-	// 		timestamp: Firebase.ServerValue.TIMESTAMP
-	// 	};
-	// 	document.getElementById('id');
-
-	// },
+	makeEvent: function(e){
+		var event = {
+			name: $('#eName').value || '',
+			caption: $('#caption').value || '',
+			picUrl: $('#eventImage').src,
+			lat: Map.currMarker.getPosition().lat(),
+			lng: Map.currMarker.getPosition().lng(),
+			creator: userId,
+			timestamp: Firebase.ServerValue.TIMESTAMP
+		};
+		// make event
+	},
 
 
 	
