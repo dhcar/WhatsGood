@@ -300,8 +300,8 @@ var app = {
 
 	makeFriends: function(snap){
 		console.log('make friends');
-		var userId           = snap.name();
-		this.friends[userId] = snap.val();
+		// var userId           = snap.name();
+		// this.friends[userId] = snap.val();
 	},
 
 	setAuth: function(){
