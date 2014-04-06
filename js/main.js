@@ -266,10 +266,11 @@ var app = {
 	},
 
 	setAuth: function(){
-		this.auth = new FirebaseSimpleLogin(app.ref, function(error,user){
+		app.auth = new FirebaseSimpleLogin(app.ref, function(error, user){
 			if (error) {
 				console.log(error);
-			} else if (user) {
+			} else if (!error) {
+				console.log(user);
 				app.user = user;
 				console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
 			}
