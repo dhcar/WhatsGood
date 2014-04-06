@@ -101,6 +101,7 @@ var app = {
 		newPicSubmit.addEventListener('click', function(e){
 			var blob = this.src;
 			var type = this.getAttribute('data-pic-type');
+			console.log('submit pic');
 			var postObj = {
 				caption: caption || '',
 				picUrl: blob,
@@ -249,10 +250,12 @@ var app = {
 	},
 
 	setUserInfo: function(snap){
+		console.log(snap);
 		this.user = snap.val();
 	},
 
 	combEvents: function(snap){
+		console.log(combEvents);
 		var eventId = snap.val();
 		this.ref.child('events').child(eventId).once('value', function(snap2) {
 			self.events[eventId] = snap2.val();
@@ -261,11 +264,13 @@ var app = {
 	},
 
 	makeFriends: function(snap){
+		console.log('make friends');
 		var userId           = snap.name();
 		this.friends[userId] = snap.val();
 	},
 
 	setAuth: function(){
+		console.log('set auth');
 		var auth = new FirebaseSimpleLogin(app.ref, function(error, user) {
     	    if (error) {
     	        console.log('doLogin');
@@ -289,6 +294,7 @@ var app = {
 		// });
 
 	getPosts: function(snap){
+		console.log('get posts');
 		var postId = snap.val;
 		self.ref.child('posts').child(postId).once('value', function(snap2) {
 			// call post reference
