@@ -360,6 +360,10 @@ function joinThis(){
 }
 
 app.setAuth();
-$(document).ready(
-	(function(){ while(app.user === null){} app.init();})
-	);
+function stuff(){
+	if(app.user === null)
+		setInterval(stuff, 2000);
+	else
+		app.init();
+}
+$(document).ready( stuff );
