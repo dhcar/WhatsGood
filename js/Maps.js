@@ -49,7 +49,7 @@ function initializeMap() {
   });
 
   google.maps.event.addListener(Map.map, 'dblclick', function(event) {
-    addEventMarker(event.latLng);
+    addEventMarker(event.latLng, 'Event');
     hackUINavigation('#make-event');
   });
 
@@ -77,6 +77,21 @@ function mapCurrent() {
 }
 
 function addEventMarker(location, title) {
+	var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      // '<h1 id="firstHeading" class="firstHeading">Event Name</h1>'+
+      '<div id="bodyContent">'+
+      '<b>Event Name</b> : '+
+      'Content'+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: 200
+  });
+
 	var image = {
 		url: 'images/Group.png',
 		// This marker is 20 pixels wide by 32 pixels tall.
@@ -90,6 +105,10 @@ function addEventMarker(location, title) {
 	  title: title,
 	  icon: image
 	});
+  google.maps.event.addListener(marker, 'click', function() {
+  	console.log(this);
+    infowindow.open(Map.map,marker);
+  });
 	Map.eventMarkers.push(marker);
 }
 
@@ -108,24 +127,6 @@ function addSoloMarker(location, title) {
 	  icon: image
 	});
 	Map.soloMarkers.push(marker);
-}
-
-function toggleMarkers(isSolo){
-	if (isSolo){
-		if (Map.soloToggle){
-			hideMarkers(true);
-		} else {
-			showMarkers(true);
-		}
-		Map.soloToggle = !Map.soloToggle;
-	} else {
-		if (Map.eventToggle){
-			hideMarkers(false);
-		} else {
-			showMarkers(false);
-		}
-		Map.eventToggle = !Map.eventToggle;
-	}
 }
 
 function addPersonalMarker(location, title) {
@@ -153,6 +154,24 @@ function addAddressMarker(address) {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
+}
+
+function toggleMarkers(isSolo){
+	if (isSolo){
+		if (Map.soloToggle){
+			hideMarkers(true);
+		} else {
+			showMarkers(true);
+		}
+		Map.soloToggle = !Map.soloToggle;
+	} else {
+		if (Map.eventToggle){
+			hideMarkers(false);
+		} else {
+			showMarkers(false);
+		}
+		Map.eventToggle = !Map.eventToggle;
+	}
 }
 
 function pinSoloMarkers(map){
