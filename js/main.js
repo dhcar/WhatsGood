@@ -88,7 +88,7 @@ var app = {
 	invites: {},
 
 	init: function(){
-		// read 
+		// read
 		// this.ref.child('users').child(app.user.id).on('value', this.setUserInfo);
 		this.ref.child(user.id).child('recentPosts').on('child_added', this.getPosts);
 		this.ref.child('private').child(user.id).child('friends').on('child_added', this.makeFriends);
