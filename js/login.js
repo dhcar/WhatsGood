@@ -1,4 +1,4 @@
-document.getElementById('facebookLogin').addEventListener('click', doLogin);
+// document.getElementById('facebookLogin').addEventListener('click', doLogin);
 
 var ref = new Firebase('https://whatsgood.firebaseio.com/');
 
