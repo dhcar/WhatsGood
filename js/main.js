@@ -129,7 +129,70 @@ var app = {
 		});
 		document.getElementById('submitNewEvent').addEventListener('click', this.makeEvent);
 		document.getElementById('searchFriends').addEventListener('keypress', this.searchFriends);
-		
+		function appendEventsList(){
+			// append events list
+			var wrapper = elt('ul', null , {'class':'list'});
+			for (var prop in this.events) {
+				if (this.events.hasOwnProperty(prop)) {
+					console.log(prop + ' property');
+					var _event = this.events.prop;
+					var blob   = _event.picUrl[0];
+					li.addEventListener('click', displayGalleries);
+					var aside  = elt('aside', [
+						elt('img', null, {'src': _event.picUrl, 'height':'80px'})
+					], null);
+					var div   = elt('div', [
+						elt('h3', _event.title, {}),
+						elt('h4', _event.creator, {}),
+						elt('p', _event.caption, {})
+					], attrs);
+					var aside2 = elt('aside', [
+						elt('span', '', {})
+						], {});
+					var li     = elt('li', [
+						aside, div, aside2
+						], {'class':''});
+					li.appendChild(aside).appendChild();
+					wrapper.appendChild(li);
+				}
+			}
+		}
+		appendEventsList();
+
+		function displayPostsOnMap(){
+			// references the list of posts individual to the user in the format of the
+			//  /posts/pushId object
+			for (var prop in app.posts) {
+				if (app.posts.hasOwnProperty(prop)) {
+					var post = app.posts.prop;
+					var creatorName;
+					app.ref.child('users').child(post.creator).child('name').once( 'value', function(snap) {
+						creatorName = snap.val();
+					});
+					// post.caption;
+					// post.creator;
+					// post.lat;
+					// post.lng;
+					// post.picUrl;
+					addSoloMarker(new google.maps.LatLng(post.lat, post.lng), creatorName);
+				}
+			}
+		}
+		displayPostsOnMap();
+
+		function displayEventsOnMap(){
+			for (var prop in app.events) {
+				if (app.events.hasOwnProperty(prop)) {
+					var _event = app.events.prop;
+					var creatorName;
+					app.ref.child('users').child(_event.creator).child('name').once( 'value', function(snap) {
+						creatorName = snap.val();
+					});
+					addEventMarker(new google.maps.LatLng(_event.lat, _event.lng), creatorName);
+				}
+			}
+		}
+
 	},
 
 	makeEvent: function(e){
@@ -208,6 +271,7 @@ var app = {
 			self.auth = new FirebaseSimpleLogin(app.ref, function(error,user){
 				if (error) {
 					console.log(error);
+					auth.login();
 				} else if (user) {
 					self.user = user;
 					console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
