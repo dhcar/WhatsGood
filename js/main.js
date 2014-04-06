@@ -251,7 +251,7 @@ var app = {
 
 	setUserInfo: function(snap){
 		console.log(snap);
-		this.user = snap.val();
+		app.user = snap.val();
 	},
 
 	combEvents: function(snap){
