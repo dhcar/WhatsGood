@@ -12,6 +12,10 @@ var	auth = new FirebaseSimpleLogin(ref, function(error, user){
 // <input type="text" placeholder="email" id="email">
 // <input type="password" id="password">
 // <button id='login'>Log In</button><button id="newUser">New User</button>
+function stringifyUser(obj){
+	var _user = JSON.stringify(obj);
+	localStorage.setItem('_user',_user);
+}
 
 $(document).ready(function(){
 	document.getElementById('login').addEventListener('click', function(){
@@ -22,7 +26,9 @@ $(document).ready(function(){
 	  		password: password,
 	  		rememberMe: true
 		});
-		window.location.replace('index.html');
+		if(auth.id){
+			window.location.replace('index.html');
+		}
 	});
 	
 	document.getElementById('newUser').addEventListener('click', function(){
@@ -40,7 +46,9 @@ $(document).ready(function(){
 	  				password: password,
 	  				rememberMe: true
 				});
-				window.location.replace('index.html');
+				if(auth.id){
+					window.location.replace('index.html');
+				}
 			}
 		});
 	});
